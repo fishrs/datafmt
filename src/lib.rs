@@ -1,24 +1,4 @@
-use std::{fs::File, time::Instant};
-
-use rand::{thread_rng, Rng};
 use serde::{Deserialize, Serialize};
-use chrono::{DateTime, Utc};
-
-fn main() {
-    let mut collection: Vec<LakeData> = vec![];
-    let mut rng = thread_rng();
-    for _ in 0..500 {
-        let mut data = LakeData::default();
-
-        data.pull = rng.gen_range(0f32..50f32);
-
-        collection.push(data);
-
-    }
-
-    let file = File::create("lakedata.fson").unwrap();
-    serde_json::to_writer(file, &collection).unwrap();
-}
 
 #[derive(Deserialize, Serialize)]
 pub struct LakeData{
