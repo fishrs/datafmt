@@ -1,12 +1,19 @@
 use std::{fs::File, time::Instant};
 
+use rand::{thread_rng, Rng};
 use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 
 fn main() {
     let mut collection: Vec<LakeData> = vec![];
-    for _ in 0..10 {
-        collection.push(LakeData::default());
+    let mut rng = thread_rng();
+    for _ in 0..500 {
+        let mut data = LakeData::default();
+
+        data.pull = rng.gen_range(0f32..50f32);
+
+        collection.push(data);
+
     }
 
     let file = File::create("lakedata.fson").unwrap();
