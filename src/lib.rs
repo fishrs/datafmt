@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize)]
 pub struct LakeData{
-    coords: Coords,
+    pub coords: Coords,
     pull: f64,
     label: Option<bool>
 }
