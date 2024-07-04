@@ -3,13 +3,19 @@ use serde::{Deserialize, Serialize};
 #[derive(Deserialize, Serialize)]
 pub struct LakeData{
     pub coords: Coords,
-    pull: f64,
+    pub pull: f64,
     label: Option<bool>
 }
 
 impl Default for LakeData {
     fn default() -> Self {
         Self { coords: Coords::default(), pull: 0f64, label: None }
+    }
+}
+
+impl LakeData {
+    pub fn new(lon: f64, lat: f64, pull: f64, label: bool) -> Self {
+        Self {coords: Coords::new(lon, lat), pull, label: Some(label)}
     }
 }
 
@@ -26,6 +32,7 @@ pub struct Coords {
 }
 
 impl Coords {
+    pub fn new(lon: f64, lat: f64) -> Self { Self { lon, lat } }
     pub fn export(&self) -> (f64, f64) {
         (self.lon, self.lat)
     }
